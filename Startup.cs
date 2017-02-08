@@ -5,7 +5,7 @@ using Nancy;
 using Nancy.Owin;
 using Nancy.ViewEngines.Razor;
 
-namespace Tamagochi
+namespace TamagochiFarm
 {
     public class Startup
     {

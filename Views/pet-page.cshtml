@@ -2,7 +2,37 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<div class="well">
-  
 
-</div>
+@foreach (var Tamagochi in Model)
+{
+  if (!@Tamagochi.GetDead())
+  {
+    <div class="well col-md-4">
+      <h1>Pet Name: @Tamagochi.GetName()</h1>
+      <p>Food level: @Tamagochi.GetFood()</p>
+      <p>Happiness level: @Tamagochi.GetHappiness()</p>
+      <p>Wakefullness level: @Tamagochi.GetWakefullness()</p>
+
+      <form action="/feed" method="post">
+        <button type="submit" class="btn btn-primary" name="feed-button" value=@Tamagochi.GetId()>Feed @Tamagochi.GetName()</button>
+      </form>
+      <form action="/play" method="post">
+        <button type="submit" class="btn btn-primary" name="play-button" value=@Tamagochi.GetId()>Play with @Tamagochi.GetName()</button>
+      </form>
+      <form action="/sleep" method="post">
+        <button type="sleep" class="btn btn-primary" name="sleep-button" value=@Tamagochi.GetId()>Let @Tamagochi.GetName() rest</button>
+      </form>
+    </div>
+  }
+  else
+  {
+    <div class="well col-md-4">
+      <h2>You monster.</h2>
+      <h2>@Tamagochi.GetName() is DEAD</h2>
+    </div>
+  }
+}
+<a href="/"><button type="button">TO HOME</button></a>
+<form action="/" method="post">
+  <button type="submit" class="btn btn-primary" name="clear-button">Clear Tamagochis</button>
+</form>

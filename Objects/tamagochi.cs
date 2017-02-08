@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 
-namespace Tamagochi.Objects
+namespace TamagochiFarm.Objects
 {
     public class Tamagochi
     {
+        private static List<Tamagochi> TamagochiList = new List<Tamagochi> {};
+
+        private static int _counter = 0;
+        private int _id;
         private string _name;
         private int _food;
         private int _happiness;
         private int _wakefullness;
+        private bool _dead = false;
 
         public Tamagochi(string name, int startFood, int startHappiness, int startWakefullness)
         {
@@ -15,6 +20,30 @@ namespace Tamagochi.Objects
           SetFood(startFood);
           SetHappiness(startHappiness);
           SetWakefullness(startWakefullness);
+          SetId(GetCounter());
+          UpCounter();
+          TamagochiList.Add(this);
+
+        }
+        public bool GetDead()
+
+        {
+          return _dead;
+        }
+        public void SetDead(bool living)
+
+        {
+          _dead = living;
+        }
+
+        public int GetCounter()
+        {
+          return _counter;
+        }
+
+        public void UpCounter()
+        {
+          _counter += 1;
         }
 
         public string GetName()
@@ -25,6 +54,16 @@ namespace Tamagochi.Objects
         public void SetName(string newName)
         {
           _name = newName;
+        }
+
+        public int GetId()
+        {
+          return _id;
+        }
+
+        public void SetId(int newId)
+        {
+          _id = newId;
         }
 
         public int GetFood()
@@ -78,7 +117,7 @@ namespace Tamagochi.Objects
           SetWakefullness(wakefullness);
         }
 
-        public bool Decrement()
+        public void Decrement()
         {
           bool dead = false;
           int food = GetFood();
@@ -102,7 +141,7 @@ namespace Tamagochi.Objects
             dead = true;
           }
           SetWakefullness(wakefullness);
-          return dead;
+          SetDead(dead);
         }
 
         public bool CheckForDeath(int value)
@@ -115,6 +154,16 @@ namespace Tamagochi.Objects
           {
             return false;
           }
+        }
+
+        public static List<Tamagochi> GetTamagochis()
+        {
+          return TamagochiList;
+        }
+
+        public static void ClearTamagochiList()
+        {
+          TamagochiList.Clear();
         }
     }
 }
