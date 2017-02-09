@@ -1,3 +1,11 @@
 @{
   Layout="Shared/_Layout.cshtml";
 }
+
+<div class="well">
+  <h1>Pet Name: @Model.GetName()</h1>
+  <p>Food level: @Model.GetFood()</p>
+  <p>Happiness level: @Model.GetHappiness()</p>
+  <p>Wakefullness level: @Model.GetWakefullness()</p>
+  <p>THIS IS WHERE I'd PUT A DESCRIPTION, IF I HAD ONE</p>
+</div>
